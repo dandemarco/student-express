@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     //true: drop table every time app restarts
     //false: keep table
 
-    Student.sync( {force: true} ).then( () => {
+    Student.sync( {force: false} ).then( () => {
         console.log('Synced student table ')
     })
 

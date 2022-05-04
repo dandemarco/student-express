@@ -24,7 +24,7 @@ router.post('/students', function(req, res, next){
         if ( err instanceof db.Sequelize.ValidationError) {
             //respond with 400 Bad Request error code, include error messages
             let messages = err.errors.map(e => e.message)
-            return res.status(400).json.messages
+            return res.status(400).json(messages)
         }
 
         //otherwise, return unexpected has gone wrong
@@ -67,7 +67,7 @@ router.patch('/students/:id', function(req, res, next){
 //DELETE deletes data
 // students/100
 router.delete('/students/:id', function(req, res, next){
-    let studentID = req.parens.id
+    let studentID = req.params.id
     Student.destroy( {where: {id: studentID }})
         .then( (rowsDeleted) => {
             if (rowsDeleted == 1) {
