@@ -7,6 +7,7 @@ let router = express.Router()
 
 //GET requests fetch data from database
 router.get('/students', function(req, res, next){
+
     //LAB: Sort student table by present and StarID
     Student.findAll( {order: ['present', 'starID']} ).then( students => {
         return res.json(students)
@@ -15,7 +16,7 @@ router.get('/students', function(req, res, next){
 
 //POST creates data
 router.post('/students', function(req, res, next){
-    Student.create( req.body).then(data => {
+    Student.create( req.body).then( (data) => {
         //201 is conventionally code for "successfully added to server
         return res.status(201).send('ok')
     }).catch( err => {
@@ -48,7 +49,7 @@ router.patch('/students/:id', function(req, res, next){
 
             //no rows - student not found - return 404
             else {
-                requestAnimationFrame.res.status(404).json(['Student with that id not found'])
+                return res.status(404).json(['Student with that id not found'])
             }
         })
         .catch (err => {
